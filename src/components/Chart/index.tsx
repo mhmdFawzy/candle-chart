@@ -11,11 +11,12 @@ import Chart, {
     Export,
     Tooltip,
 } from 'devextreme-react/chart';
+import {ChartArgs} from '../../models/Chart';
 
 //TODO REMOVE UNKOWN
 
 const CandleChart: React.FC<{data: unknown[]}> = ({data}) => {
-    const customizeTooltip = (arg: any) => {
+    const customizeTooltip = (arg: ChartArgs) => {
         return {
             text: `Open: $${arg.openValue}<br/>
     Close: $${arg.closeValue}<br/>
