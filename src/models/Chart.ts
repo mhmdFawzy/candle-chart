@@ -3,4 +3,5 @@ export interface ChartArgs {
     openValue: string;
     closeValue: string;
     highValue: string;
+    argumentText: string;
 }
