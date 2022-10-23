@@ -10,11 +10,11 @@ import Chart, {
     Export,
     Tooltip,
 } from 'devextreme-react/chart';
+import {ChartArgs} from '../../models/Chart';
 
 //TODO REMOVE UNKOWN
 const CandleChart: React.FC<{data: unknown[]}> = ({data}) => {
-    const customizeTooltip = (arg: any) => {
-        console.log(arg);
+    const customizeTooltip = (arg: ChartArgs) => {
         return {
             text: `Date: ${arg.argumentText.substring(0, 15)}<br/>
 Open: $${arg.openValue}<br/>

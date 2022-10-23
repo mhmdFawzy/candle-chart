@@ -1,22 +1,15 @@
 import React, {useEffect, useState} from 'react';
-import './App.css';
 import Papa from 'papaparse';
 
 import Text from './components/Text';
 import Select from './components/Select';
 import CandleChart from './components/Chart';
-interface CSVData {
-    'Adj Close': string;
-    Close: string;
-    Date: Date;
-    High: string;
-    Low: string;
-    Open: string;
-    Volume: string;
-}
+import {CSVData} from './models/CSVData';
+
 function App() {
     const [CSVdata, setCSVdata] = useState<CSVData[]>([]);
     const [period, setPeriod] = useState('');
+
     useEffect(() => {
         if (period) {
             fetch(
@@ -38,7 +31,7 @@ function App() {
                         },
                     );
                     setCSVdata(
-                        results.data.map((s, i) => {
+                        results.data.map((s) => {
                             const date = String(s.Date).split('-').join(', ');
                             return {...s, date: new Date(date)};
                         }),
@@ -53,7 +46,7 @@ function App() {
 
     return (
         <>
-            <div>
+            <header className="header">
                 <Text value="Please select the period " />
                 <Select
                     options={[
@@ -65,8 +58,10 @@ function App() {
                     onChange={handlePeriodChange}
                     value={period}
                 />
-            </div>
-            {CSVdata.length >= 1 && <CandleChart data={CSVdata} />}
+            </header>
+            <section>
+                {CSVdata.length >= 1 && <CandleChart data={CSVdata} />}
+            </section>
         </>
     );
 }
