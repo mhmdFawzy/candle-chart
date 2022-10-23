@@ -3,7 +3,6 @@ import Chart, {
     CommonSeriesSettings,
     Series,
     Reduction,
-    ArgumentAxis,
     Label,
     Format,
     ValueAxis,
@@ -13,14 +12,15 @@ import Chart, {
 } from 'devextreme-react/chart';
 
 //TODO REMOVE UNKOWN
-
 const CandleChart: React.FC<{data: unknown[]}> = ({data}) => {
     const customizeTooltip = (arg: any) => {
+        console.log(arg);
         return {
-            text: `Open: $${arg.openValue}<br/>
-    Close: $${arg.closeValue}<br/>
-    High: $${arg.highValue}<br/>
-    Low: $${arg.lowValue}<br/>,`,
+            text: `Date: ${arg.argumentText.substring(0, 15)}<br/>
+Open: $${arg.openValue}<br/>
+Close: $${arg.closeValue}<br/>
+High: $${arg.highValue}<br/>
+Low: $${arg.lowValue}<br/>`,
         };
     };
     return (
@@ -34,9 +34,7 @@ const CandleChart: React.FC<{data: unknown[]}> = ({data}) => {
                 closeValueField="Close">
                 <Reduction color="red" />
             </Series>
-            <ArgumentAxis inverted={true}>
-                <Label format="shortDate" />
-            </ArgumentAxis>
+
             <ValueAxis inverted={true}>
                 <Label>
                     <Format precision={0} type="currency" />
